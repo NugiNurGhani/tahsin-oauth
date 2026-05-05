@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting to Tahsin…</title>
+  <script>
+    window.location.href = "tahsin://oauth/callback" + window.location.search;
+  </script>
+</head>
+<body>
+  <p>Redirecting back to Tahsin…</p>
+  <p><a id="link">Tap here if nothing happens</a></p>
+  <script>
+    document.getElementById("link").href =
+      "tahsin://oauth/callback" + window.location.search;
+  </script>
+</body>
+</html>
