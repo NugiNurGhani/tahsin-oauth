@@ -1,17 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting to Tahsin…</title>
-  <script>
-    window.location.href = "tahsin://oauth/callback" + window.location.search;
-  </script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 { font-size: 1.4rem; margin-bottom: 8px; }
+    p { color: #666; font-size: 0.95rem; }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #2d6a4f;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting back to Tahsin…</p>
-  <p><a id="link">Tap here if nothing happens</a></p>
+  <h1>Redirecting to Tahsin…</h1>
+  <p>You will be taken back to the app automatically.</p>
+  <p>If nothing happens, tap the button below.</p>
+  <a id="open-app">Open Tahsin App</a>
+
   <script>
-    document.getElementById("link").href =
-      "tahsin://oauth/callback" + window.location.search;
+    var params = window.location.search;
+    var deepLink = "tahsin://oauth/callback" + params;
+    document.getElementById("open-app").href = deepLink;
+    window.location.href = deepLink;
   </script>
 </body>
 </html>
