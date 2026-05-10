@@ -1,48 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting to Tahsin…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Tahsin – Redirecting…</title>
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      min-height: 100dvh;
       margin: 0;
-      background: #f9f9f9;
-      color: #333;
+      background: #f2f2f7;
+      color: #1c1c1e;
       text-align: center;
-      padding: 20px;
+      padding: 24px 20px env(safe-area-inset-bottom, 24px);
     }
-    h1 { font-size: 1.4rem; margin-bottom: 8px; }
-    p { color: #666; font-size: 0.95rem; }
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 40px 28px 32px;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    /* App icon */
+    .app-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 22px;
+      border-radius: 18px;
       background: #2d6a4f;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(45, 106, 79, 0.35);
     }
+
+    .app-icon svg {
+      width: 38px;
+      height: 38px;
+      fill: #ffffff;
+    }
+
+    /* Heading */
+    h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .status-text {
+      font-size: 0.88rem;
+      color: #6c6c70;
+      margin: 0 0 24px;
+      min-height: 2.6em;
+      line-height: 1.45;
+    }
+
+    /* Spinner */
+    .spinner-wrap {
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .spinner {
+      width: 26px;
+      height: 26px;
+      border: 2.5px solid #e5e5ea;
+      border-top-color: #2d6a4f;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+
+    .spinner.hidden { visibility: hidden; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Error box */
+    .error-box {
+      display: none;
+      background: #fff2f0;
+      border: 1px solid #ffccc7;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .error-box.visible { display: block; }
+
+    .error-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #cf1322;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin: 0 0 4px;
+    }
+
+    .error-detail {
+      font-size: 0.85rem;
+      color: #820014;
+      margin: 0;
+      word-break: break-word;
+      line-height: 1.4;
+    }
+
+    /* CTA button */
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 15px 20px;
+      background: #2d6a4f;
+      color: #ffffff;
+      border-radius: 13px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s, transform 0.1s;
+      opacity: 0.35;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .cta-btn.active {
+      opacity: 1;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    .cta-btn.active:active {
+      opacity: 0.82;
+      transform: scale(0.98);
+    }
+
+    /* Hint text */
+    .hint {
+      font-size: 0.78rem;
+      color: #8e8e93;
+      margin: 14px 0 0;
+      line-height: 1.5;
+      visibility: hidden;
+    }
+
+    .hint.visible { visibility: visible; }
   </style>
 </head>
 <body>
-  <h1>Redirecting to Tahsin…</h1>
-  <p>You will be taken back to the app automatically.</p>
-  <p>If nothing happens, tap the button below.</p>
-  <a id="open-app">Open Tahsin App</a>
+  <div class="card">
+
+    <div class="app-icon" aria-hidden="true">
+      <!-- Open book / Quran icon -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/>
+      </svg>
+    </div>
+
+    <h1 id="title">Membuka Tahsin…</h1>
+
+    <div class="spinner-wrap">
+      <div class="spinner" id="spinner" role="status" aria-label="Memuat"></div>
+    </div>
+
+    <p class="status-text" id="status">Harap tunggu sebentar.</p>
+
+    <!-- OAuth error display (hidden unless error param present) -->
+    <div class="error-box" id="error-box" role="alert" aria-live="assertive">
+      <p class="error-label">Login Gagal</p>
+      <p class="error-detail" id="error-detail"></p>
+    </div>
+
+    <!-- CTA button — starts dimmed, activated after redirect attempt -->
+    <a class="cta-btn" id="open-btn" role="button" aria-label="Buka Aplikasi Tahsin">
+      Buka Aplikasi Tahsin
+    </a>
+
+    <p class="hint" id="hint">
+      Aplikasi belum terbuka? Pastikan Tahsin sudah terpasang, lalu tap tombol di atas.
+    </p>
+
+  </div>
 
   <script>
-    var params = window.location.search;
-    var deepLink = "tahsin://oauth/callback" + params;
-    document.getElementById("open-app").href = deepLink;
-    window.location.href = deepLink;
+  (function () {
+    var SCHEME      = "tahsin://oauth/callback";
+    var FALLBACK_MS = 1800;
+
+    /* Build deep link — forward ALL params & hash exactly as-is */
+    var search   = window.location.search || "";
+    var hash     = window.location.hash   || "";
+    var deepLink = SCHEME + search + hash;
+
+    /* Parse only what we need for UX; never log tokens or codes */
+    var params        = new URLSearchParams(search);
+    var oauthError    = params.get("error");
+    var oauthErrorRaw = params.get("error_description");
+
+    var titleEl   = document.getElementById("title");
+    var spinnerEl = document.getElementById("spinner");
+    var statusEl  = document.getElementById("status");
+    var errorBox  = document.getElementById("error-box");
+    var errorDetail = document.getElementById("error-detail");
+    var openBtn   = document.getElementById("open-btn");
+    var hintEl    = document.getElementById("hint");
+
+    /* Wire button to deep link (always) */
+    openBtn.setAttribute("href", deepLink);
+
+    if (oauthError) {
+      /* ── Error path ─────────────────────────────────────── */
+      titleEl.textContent  = "Login Tidak Berhasil";
+      spinnerEl.classList.add("hidden");
+      statusEl.textContent = "Kembali ke aplikasi untuk mencoba lagi.";
+      openBtn.textContent  = "Kembali ke Tahsin";
+
+      /* Safely decode and render error — textContent prevents XSS */
+      var desc = oauthError;
+      if (oauthErrorRaw) {
+        try { desc = decodeURIComponent(oauthErrorRaw); } catch (_) {}
+      }
+      errorDetail.textContent = desc;
+      errorBox.classList.add("visible");
+
+      /* Enable button immediately on error */
+      openBtn.classList.add("active");
+
+    } else {
+      /* ── Success path ────────────────────────────────────── */
+      /* Attempt auto-open; replace avoids polluting history stack */
+      window.location.replace(deepLink);
+
+      /* After FALLBACK_MS, assume app did not open and show manual UI */
+      setTimeout(function () {
+        spinnerEl.classList.add("hidden");
+        statusEl.textContent = "Tap tombol di bawah jika aplikasi belum terbuka.";
+        openBtn.classList.add("active");
+        hintEl.classList.add("visible");
+      }, FALLBACK_MS);
+    }
+  }());
   </script>
 </body>
 </html>
