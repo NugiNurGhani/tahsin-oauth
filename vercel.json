@@ -1,1 +1,21 @@
-{}
+{
+  "headers": [
+    {
+      "source": "/oauth/callback(.*)",
+      "headers": [
+        { "key": "Cache-Control",       "value": "no-store, no-cache, private, max-age=0" },
+        { "key": "Referrer-Policy",     "value": "no-referrer" },
+        { "key": "X-Frame-Options",     "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options",        "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy",        "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

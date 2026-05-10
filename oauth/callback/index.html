@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Prevent OAuth code from leaking via Referer header -->
+  <meta name="referrer" content="no-referrer">
+  <!-- Block search engine indexing of callback URLs -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- CSP: restrict what can run on this page (inline-only, no external sources) -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
   <title>Tahsin – Redirecting…</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
